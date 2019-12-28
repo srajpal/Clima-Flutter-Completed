@@ -51,7 +51,7 @@ class _CityScreenState extends State<CityScreen> {
                 ),
               ),
               Builder(
-                // use a builder to pass the Scafforl context through Flatbutton
+                // use a builder to pass the Scaffold context through Flatbutton
                 // to the SnackBar Widget
                 builder: (context) => FlatButton(
                   onPressed: () async {

@@ -10,7 +10,7 @@ class LoadingScreen extends StatefulWidget {
 
 class _LoadingScreenState extends State<LoadingScreen> {
   // if an error occurred while getting the device location or when fetching
-  // the weather information using the api capture the info and show it to
+  // the weather information using the api, capture the info and show it to
   // the user
   String err = '';
 
