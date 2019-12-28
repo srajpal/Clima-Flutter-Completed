@@ -1,20 +1,23 @@
-import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
+import 'package:http/http.dart' as http;
 
+// class to fetch data using HTTP
 class NetworkHelper {
-  NetworkHelper(this.url);
-
+  NetworkHelper({@required this.url});
   final String url;
 
-  Future getData() async {
-    http.Response response = await http.get(url);
+  Future<dynamic> fetchData() async {
+    print('NetworkHelper::fetchData()');
+    final http.Response response = await http.get(url);
 
     if (response.statusCode == 200) {
-      String data = response.body;
-
-      return jsonDecode(data);
+      print(response.body);
+      return jsonDecode(response.body);
     } else {
       print(response.statusCode);
+      print(response.body);
+      return jsonDecode(response.body);
     }
   }
 }

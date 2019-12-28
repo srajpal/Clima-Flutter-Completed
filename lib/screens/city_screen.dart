@@ -1,5 +1,7 @@
+import 'package:clima/model/weather_model.dart';
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
+import 'package:provider/provider.dart';
 
 class CityScreen extends StatefulWidget {
   @override
@@ -7,8 +9,7 @@ class CityScreen extends StatefulWidget {
 }
 
 class _CityScreenState extends State<CityScreen> {
-  String cityName;
-
+  String cityName = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,22 +39,53 @@ class _CityScreenState extends State<CityScreen> {
               Container(
                 padding: EdgeInsets.all(20.0),
                 child: TextField(
+                  decoration: kTextFieldInputDecoration,
                   style: TextStyle(
                     color: Colors.black,
                   ),
-                  decoration: kTextFieldInputDecoration,
                   onChanged: (value) {
-                    cityName = value;
+                    setState(() {
+                      cityName = value;
+                    });
                   },
                 ),
               ),
-              FlatButton(
-                onPressed: () {
-                  Navigator.pop(context, cityName);
-                },
-                child: Text(
-                  'Get Weather',
-                  style: kButtonTextStyle,
+              Builder(
+                // use a builder to pass the Scafforl context through Flatbutton
+                // to the SnackBar Widget
+                builder: (context) => FlatButton(
+                  onPressed: () async {
+                    if (cityName != null && cityName != '') {
+                      await Provider.of<WeatherModel>(context)
+                          .getCityWeather(cityName);
+                      // if we have an error from the API use SnackBar to show it
+                      if (Provider.of<WeatherModel>(context).err != null &&
+                          Provider.of<WeatherModel>(context).err != '') {
+                        Scaffold.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              Provider.of<WeatherModel>(context).err,
+                            ),
+                          ),
+                        );
+                      } else {
+                        Navigator.pop(context);
+                      }
+                    } else {
+                      // No city name but button pressed
+                      Scaffold.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            'Please enter a city name to check for.',
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                  child: Text(
+                    'Get Weather',
+                    style: kButtonTextStyle,
+                  ),
                 ),
               ),
             ],

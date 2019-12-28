@@ -1,3 +1,21 @@
+# Clima with Provider
+
+This is a fork of the App Brewery Clima App written in Flutter.
+
+This version uses Provider for state management.
+
+provider 4.0.0
+
+https://pub.dev/packages/provider
+
+Updated by Sunny Rajpal
+
+Rajpal Consulting Services, Inc
+
+https://www.srajpal.com
+
+
+
 ![App Brewery Banner](https://github.com/londonappbrewery/Images/blob/master/AppBreweryBanner.png)
 
 
@@ -6,6 +24,7 @@
 ## Our Goal
 
 The objective of this tutorial is to learn about asynchronous programming in Dart. We'll look at how to carry out time consuming tasks such as getting device location and networking to get data from the internet.
+
 
 
 ## What you will create
