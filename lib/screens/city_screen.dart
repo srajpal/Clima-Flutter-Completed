@@ -58,14 +58,12 @@ class _CityScreenState extends State<CityScreen> {
                     if (cityName != null && cityName != '') {
                       await Provider.of<WeatherModel>(context)
                           .getCityWeather(cityName);
+                      String err = Provider.of<WeatherModel>(context).err;
                       // if we have an error from the API use SnackBar to show it
-                      if (Provider.of<WeatherModel>(context).err != null &&
-                          Provider.of<WeatherModel>(context).err != '') {
+                      if (err != null && err != '') {
                         Scaffold.of(context).showSnackBar(
                           SnackBar(
-                            content: Text(
-                              Provider.of<WeatherModel>(context).err,
-                            ),
+                            content: Text(err),
                           ),
                         );
                       } else {
